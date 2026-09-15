@@ -1,51 +1,49 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import Login from "../pages/auth/Login";
-import Register from "../pages/auth/Register";
-
 import Dashboard from "../pages/Dashboard/Dashboard";
-import AccesRefuse from "../pages/AccesRefuse/AccesRefuse";
+//import AccesRefuse from "../pages/AccesRefuse/AccesRefuse";
 
-import MainLayout from "../layouts/MainLayout";
-import ProtectedRoute from "./ProtectedRoute";
+//import MainLayout from "../layouts/MainLayout";
+//import ProtectedRoute from "./ProtectedRoute";
 import RoleGuard from "./RoleGuard";
 
-import Affectations from "../pages/Affectations/Affectations";
-import AjouterAffectation from "../pages/Affectations/AjouterAffectation";
-import ConsulterAffectation from "../pages/Affectations/ConsulterAffectation";
-import ModifierAffectation from "../pages/Affectations/ModifierAffectation";
+//import Affectations from "../pages/Affectations/Affectations";
+//import AjouterAffectation from "../pages/Affectations/AjouterAffectation";
+//import ConsulterAffectation from "../pages/Affectations/ConsulterAffectation";
+//import ModifierAffectation from "../pages/Affectations/ModifierAffectation";
 
-import Categories from "../pages/Categories/Categories";
-import AjouterCategorie from "../pages/Categories/AjouterCategorie";
-import ConsulterCategorie from "../pages/Categories/ConsulterCategorie";
-import ModifierCategorie from "../pages/Categories/ModifierCategorie";
+//import Categories from "../pages/Categories/Categories";
+//import AjouterCategorie from "../pages/Categories/AjouterCategorie";
+//import ConsulterCategorie from "../pages/Categories/ConsulterCategorie";
+//import ModifierCategorie from "../pages/Categories/ModifierCategorie";
 
-import Employes from "../pages/Employes/Employes";
-import AjouterEmploye from "../pages/Employes/AjouterEmploye";
-import ConsulterEmploye from "../pages/Employes/ConsulterEmploye";
-import ModifierEmploye from "../pages/Employes/ModifierEmploye";
+//import Employes from "../pages/Employes/Employes";
+//import AjouterEmploye from "../pages/Employes/AjouterEmploye";
+//import ConsulterEmploye from "../pages/Employes/ConsulterEmploye";
+//import ModifierEmploye from "../pages/Employes/ModifierEmploye";
 
-import Equipements from "../pages/Equipements/Equipements";
-import AjouterEquipement from "../pages/Equipements/AjouterEquipement";
-import ConsulterEquipement from "../pages/Equipements/ConsulterEquipement";
-import ModifierEquipement from "../pages/Equipements/ModifierEquipement";
+//import Equipements from "../pages/Equipements/Equipements";
+//import AjouterEquipement from "../pages/Equipements/AjouterEquipement";
+//import ConsulterEquipement from "../pages/Equipements/ConsulterEquipement";
+//import ModifierEquipement from "../pages/Equipements/ModifierEquipement";
 
-import Incidents from "../pages/Incidents/Incidents";
-import AjouterIncident from "../pages/Incidents/AjouterIncident";
-import ConsulterIncident from "../pages/Incidents/ConsulterIncident";
-import ModifierIncident from "../pages/Incidents/ModifierIncident";
+//import Incidents from "../pages/Incidents/Incidents";
+//import AjouterIncident from "../pages/Incidents/AjouterIncident";
+//import ConsulterIncident from "../pages/Incidents/ConsulterIncident";
+//import ModifierIncident from "../pages/Incidents/ModifierIncident";
 
-import Techniciens from "../pages/Techniciens/Techniciens";
-import AjouterTechnicien from "../pages/Techniciens/AjouterTechnicien";
-import ConsulterTechnicien from "../pages/Techniciens/ConsulterTechnicien";
-import ModifierTechnicien from "../pages/Techniciens/ModifierTechnicien";
+//import Techniciens from "../pages/Techniciens/Techniciens";
+//import AjouterTechnicien from "../pages/Techniciens/AjouterTechnicien";
+//import ConsulterTechnicien from "../pages/Techniciens/ConsulterTechnicien";
+//import ModifierTechnicien from "../pages/Techniciens/ModifierTechnicien";
 
-import Utilisateurs from "../pages/Utilisateurs/Utilisateurs";
-import AjouterUtilisateur from "../pages/Utilisateurs/AjouterUtilisateur";
-import ConsulterUtilisateur from "../pages/Utilisateurs/ConsulterUtilisateur";
-import ModifierUtilisateur from "../pages/Utilisateurs/ModifierUtilisateur";
+//import Utilisateurs from "../pages/Utilisateurs/Utilisateurs";
+//import AjouterUtilisateur from "../pages/Utilisateurs/AjouterUtilisateur";
+//import ConsulterUtilisateur from "../pages/Utilisateurs/ConsulterUtilisateur";
+//import ModifierUtilisateur from "../pages/Utilisateurs/ModifierUtilisateur";
 
-import NotFound from "../pages/NotFound";
+//import NotFound from "../pages/NotFound";
 
 const ADMIN = "ROLE_ADMIN";
 const EMPLOYEE = "ROLE_EMPLOYEE";
@@ -57,6 +55,8 @@ function AppRoutes() {
             <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<Login />} />
 
+            {/*
+
             <Route
                 element={
                     <ProtectedRoute>
@@ -64,6 +64,8 @@ function AppRoutes() {
                     </ProtectedRoute>
                 }
             >
+             */}
+
                 <Route
                     path="/dashboard"
                     element={
@@ -72,7 +74,7 @@ function AppRoutes() {
                         </RoleGuard>
                     }
                 />
-
+            {/*
                 <Route
                     path="/affectations"
                     element={
@@ -307,6 +309,8 @@ function AppRoutes() {
 
             <Route path="/acces-refuse" element={<AccesRefuse />} />
             <Route path="*" element={<NotFound />} />
+
+              */}
         </Routes>
     );
 }

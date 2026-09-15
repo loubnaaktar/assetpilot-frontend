@@ -4,6 +4,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "../../service/AuthService.js";
 import { useNavigate } from "react-router-dom";
+import { FiMail, FiLock, FiArrowRight } from "react-icons/fi";
+import logoImg from "../../assets/logo .png";
 import "./Login.css";
 
 const schema = yup.object({
@@ -11,7 +13,7 @@ const schema = yup.object({
         .string()
         .email("Format d'email invalide")
         .required("L'email est obligatoire"),
-    motDePasse: yup.string().required("Le mot de passe est obligatoire"),
+    password: yup.string().required("Le mot de passe est obligatoire"),
 });
 
 function Login() {
@@ -44,16 +46,11 @@ function Login() {
 
     return (
         <div className="login-container">
+            {/* Côté Gauche - Full Background Image */}
             <div className="login-left">
                 <div className="left-content">
                     <div className="brand-card">
-                        <div className="logo-box">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
-                            </svg>
-                        </div>
-                        <span className="brand-name">AssetPilot</span>
+                        <img src={logoImg} alt="AssetPilot Logo" className="logo-img" />
                     </div>
 
                     <h1 className="hero-title">
@@ -81,6 +78,7 @@ function Login() {
                 </div>
             </div>
 
+            {/* Côté Droit - Formulaire */}
             <div className="login-right">
                 <div className="form-box">
                     <h2 className="login-title">Bon retour</h2>
@@ -98,7 +96,7 @@ function Login() {
                         <div className="login-group">
                             <label className="login-label">Adresse e-mail</label>
                             <div className="input-wrapper">
-                                <span className="input-icon">✉</span>
+                                <FiMail className="input-icon" />
                                 <input
                                     type="email"
                                     placeholder="alex.rivers@societe.com"
@@ -112,22 +110,21 @@ function Login() {
                         <div className="login-group">
                             <div className="label-row">
                                 <label className="login-label">Mot de passe</label>
-                                <a href="#forgot" className="forgot-link">Mot de passe oublié ?</a>
                             </div>
                             <div className="input-wrapper">
-                                <span className="input-icon">🔒</span>
+                                <FiLock className="input-icon" />
                                 <input
                                     type="password"
                                     placeholder="••••••••••••"
-                                    {...register("motDePasse")}
+                                    {...register("password")}
                                     className="login-field"
                                 />
                             </div>
-                            <p className="error-msg">{errors.motDePasse?.message}</p>
+                            <p className="error-msg">{errors.password?.message}</p>
                         </div>
 
                         <button type="submit" disabled={isSubmitting} className="login-btn">
-                            {isSubmitting ? "Connexion..." : "Se connecter au portail →"}
+                            {isSubmitting ? "Connexion..." : <>Se connecter au portail <FiArrowRight /></>}
                         </button>
 
                         <div className="login-footer">
