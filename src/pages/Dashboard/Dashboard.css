@@ -1,0 +1,233 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.loading-text {
+    font-size: 1rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.dashboard-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.dashboard-header p {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.kpi-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+}
+
+.kpi-header {
+    margin-bottom: 12px;
+}
+
+.kpi-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.icon-dark { background-color: #f1f5f9; color: #0b132b; }
+.icon-green { background-color: #d1fae5; color: #09654a; }
+.icon-red { background-color: #fee2e2; color: #930d0d; }
+.icon-blue { background-color: #dbeafe; color: #0c3377; }
+
+.kpi-title {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.kpi-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.chart-card {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.chart-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.donut-wrapper {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    margin: 16px auto;
+}
+
+.donut-center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.donut-center-text .number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.donut-center-text .label {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.chart-legend {
+    display: flex;
+    justify-content: space-around;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.legend-item {
+    font-size: 0.8rem;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.dot.green { background-color: #09654a; }
+.dot.blue { background-color: #0c3377; }
+.dot.red { background-color: #930d0d; }
+
+.line-wrapper {
+    height: 200px;
+}
+
+.dashboard-card {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.card-header {
+    margin-bottom: 16px;
+}
+
+.card-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.badge-live {
+    font-size: 0.75rem;
+    color: #10b981;
+    font-weight: 600;
+}
+
+.recent-incidents-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.no-data {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.incident-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    border: 1px solid #f1f5f9;
+}
+
+.incident-item-icon {
+    width: 36px;
+    height: 36px;
+    background-color: #e2e8f0;
+    color: #0f172a;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.incident-item-details {
+    flex: 1;
+}
+
+.incident-item-details strong {
+    font-size: 0.85rem;
+    color: #0f172a;
+}
+
+.incident-item-details p {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.status-badge.ouvert { background-color: #fee2e2; color: #dc2626; }
+.status-badge.en_cours { background-color: #fef3c7; color: #d97706; }
+.status-badge.resolu { background-color: #d1fae5; color: #059669; }
+
+@media (max-width: 900px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}

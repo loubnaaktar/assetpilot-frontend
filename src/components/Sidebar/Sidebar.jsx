@@ -38,7 +38,7 @@ function Sidebar() {
                 {(role === "ADMIN" || role === "TECHNICIAN") && (
                     <NavLink to="/equipements" className="sidebar-item">
                         <FiArchive className="sidebar-icon" />
-                        <span>Inventaire des actifs</span>
+                        <span>Équipements</span>
                     </NavLink>
                 )}
 

@@ -32,10 +32,6 @@ function Landing() {
             </div>
 
             <section className="landing-hero">
-                <div className="landing-logo-card">
-                    <img src={logoImg} alt="AssetPilot Logo" className="landing-logo-lg" />
-                </div>
-
                 <h1 className="landing-title">
                     Gouvernance des infrastructures, <span className="landing-highlight">simplifiée.</span>
                 </h1>
