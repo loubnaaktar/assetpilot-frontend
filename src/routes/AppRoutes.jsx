@@ -1,11 +1,12 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Login from "../pages/auth/Login";
+import Landing from "../pages/Landing/Landing";
 import Dashboard from "../pages/Dashboard/Dashboard";
 //import AccesRefuse from "../pages/AccesRefuse/AccesRefuse";
 
-//import MainLayout from "../layouts/MainLayout";
-//import ProtectedRoute from "./ProtectedRoute";
+import MainLayout from "../layouts/MainLayout";
+import ProtectedRoute from "./ProtectedRoute";
 import RoleGuard from "./RoleGuard";
 
 //import Affectations from "../pages/Affectations/Affectations";
@@ -45,17 +46,16 @@ import RoleGuard from "./RoleGuard";
 
 //import NotFound from "../pages/NotFound";
 
-const ADMIN = "ROLE_ADMIN";
-const EMPLOYEE = "ROLE_EMPLOYEE";
-const TECHNICIAN = "ROLE_TECHNICIAN";
+const ADMIN = "ADMIN";
+const EMPLOYEE = "EMPLOYEE";
+const TECHNICIAN = "TECHNICIAN";
 
 function AppRoutes() {
     return (
         <Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />
 
-            {/*
 
             <Route
                 element={
@@ -64,7 +64,6 @@ function AppRoutes() {
                     </ProtectedRoute>
                 }
             >
-             */}
 
                 <Route
                     path="/dashboard"
@@ -305,12 +304,13 @@ function AppRoutes() {
                         </RoleGuard>
                     }
                 />
-            </Route>
+
 
             <Route path="/acces-refuse" element={<AccesRefuse />} />
             <Route path="*" element={<NotFound />} />
 
               */}
+            </Route>
         </Routes>
     );
 }
