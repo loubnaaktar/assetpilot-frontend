@@ -1,0 +1,117 @@
+.form-main-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.form-content-wrapper {
+    width: 100%;
+    max-width: 600px;
+}
+
+.form-card-container {
+    background-color: #ffffff;
+    padding: 32px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.form-form-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 12px;
+}
+
+.form-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-form-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+.form-form-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #0f172a;
+    outline: none;
+    background-color: #ffffff;
+    transition: border-color 0.2s;
+}
+
+.form-form-input:focus {
+    border-color: #0b132b;
+}
+
+.form-error-message {
+    color: #dc2626;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.form-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 18px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.form-btn-annuler {
+    padding: 10px 18px;
+    border: 1px solid #cbd5e1;
+    background-color: #ffffff;
+    color: #334155;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.form-btn-annuler:hover {
+    background-color: #f8fafc;
+}
+
+.form-btn-enregistrer {
+    padding: 10px 20px;
+    background-color: #0b132b;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.form-btn-enregistrer:hover {
+    background-color: #1e293b;
+}
+
+@media (max-width: 640px) {
+    .form-card-container {
+        padding: 20px;
+    }
+}
