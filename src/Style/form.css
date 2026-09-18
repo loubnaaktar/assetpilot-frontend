@@ -62,7 +62,25 @@
     border-color: #0b132b;
 }
 
-.form-error-message {
+.form-search-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px dashed #94a3b8;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #334155;
+    outline: none;
+    background-color: #f8fafc;
+}
+
+.form-search-input:focus {
+    border-color: #0b132b;
+    border-style: solid;
+    background-color: #ffffff;
+}
+
+.form-error-message,
+.form-error {
     color: #dc2626;
     font-size: 0.75rem;
     font-weight: 500;

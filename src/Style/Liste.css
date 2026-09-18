@@ -89,6 +89,29 @@
     border-color: #0b132b;
 }
 
+.filter-toggle {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background-color: #ffffff;
+    color: #334155;
+    outline: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.filter-toggle:hover {
+    background-color: #f1f5f9;
+}
+
+.filter-toggle.active {
+    background-color: #0b132b;
+    color: #ffffff;
+    border-color: #0b132b;
+}
+
 .filters-group {
     display: flex;
     align-items: center;
@@ -142,10 +165,17 @@
     text-align: center;
 }
 
+.clients-table th.text-center {
+    text-align: center;
+}
+
 .actions-cell {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 8px;
+    text-align: center;
+    min-width: 140px;
 }
 
 .btn-action {
@@ -161,9 +191,28 @@
     gap: 4px;
 }
 
+.btn-icon-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
 .btn-consulter {
     background-color: #e0f2fe;
     color: #0369a1;
+}
+
+.btn-consulter:hover {
+    background-color: #bae6fd;
 }
 
 .btn-modifier {
@@ -171,9 +220,17 @@
     color: #b45309;
 }
 
+.btn-modifier:hover {
+    background-color: #fde68a;
+}
+
 .btn-supprimer {
     background-color: #fee2e2;
     color: #dc2626;
+}
+
+.btn-supprimer:hover {
+    background-color: #fecaca;
 }
 
 .status-chip {

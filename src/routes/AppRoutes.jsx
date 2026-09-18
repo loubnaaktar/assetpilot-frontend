@@ -9,15 +9,15 @@ import MainLayout from "../layouts/MainLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import RoleGuard from "./RoleGuard";
 
-//import Affectations from "../pages/Affectations/Affectations";
-//import AjouterAffectation from "../pages/Affectations/AjouterAffectation";
-//import ConsulterAffectation from "../pages/Affectations/ConsulterAffectation";
+import Affectations from "../pages/Affectations/Affectations";
+import AjouterAffectation from "../pages/Affectations/AjouterAffectation";
+import ConsulterAffectation from "../pages/Affectations/ConsulterAffectation";
 //import ModifierAffectation from "../pages/Affectations/ModifierAffectation";
 
-//import Categories from "../pages/Categories/Categories";
-//import AjouterCategorie from "../pages/Categories/AjouterCategorie";
-//import ConsulterCategorie from "../pages/Categories/ConsulterCategorie";
-//import ModifierCategorie from "../pages/Categories/ModifierCategorie";
+import Categories from "../pages/Categories/Categories";
+import AjouterCategorie from "../pages/Categories/AjouterCategorie";
+import ConsulterCategorie from "../pages/Categories/ConsulterCategorie";
+import ModifierCategorie from "../pages/Categories/ModifierCategorie";
 
 //import Employes from "../pages/Employes/Employes";
 //import AjouterEmploye from "../pages/Employes/AjouterEmploye";
@@ -26,10 +26,9 @@ import RoleGuard from "./RoleGuard";
 
 import Equipements from "../pages/Equipements/Equipements";
 import AjouterEquipement from "../pages/Equipements/AjouterEquipement";
-//import ConsulterEquipement from "../pages/Equipements/ConsulterEquipement";
 import ModifierEquipement from "../pages/Equipements/ModifierEquipement";
 
-//import Incidents from "../pages/Incidents/Incidents";
+import Incidents from "../pages/Incidents/Incidents";
 //import AjouterIncident from "../pages/Incidents/AjouterIncident";
 //import ConsulterIncident from "../pages/Incidents/ConsulterIncident";
 //import ModifierIncident from "../pages/Incidents/ModifierIncident";
@@ -99,50 +98,6 @@ function AppRoutes() {
                         </RoleGuard>
                     }
                 />
-            {/*
-
-
-                <Route
-                    path="/consulterEquipement/:id"
-                    element={
-                        <RoleGuard roles={[ADMIN, TECHNICIAN]}>
-                            <ConsulterEquipement />
-                        </RoleGuard>
-                    }
-                />
-
-                <Route
-                    path="/affectations"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <Affectations />
-                        </RoleGuard>
-                    }
-                />
-                <Route
-                    path="/ajouterAffectation"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <AjouterAffectation />
-                        </RoleGuard>
-                    }
-                />
-                <Route
-                    path="/consulterAffectation/:id"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <ConsulterAffectation />
-                        </RoleGuard>
-                    }
-                />
-                <Route
-                    path="/modifierAffectation/:id"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <ModifierAffectation />
-                        </RoleGuard>
-                    }
-                />
 
                 <Route
                     path="/categories"
@@ -160,6 +115,16 @@ function AppRoutes() {
                         </RoleGuard>
                     }
                 />
+
+                <Route
+                    path="/modifierCategorie/:id"
+                    element={
+                        <RoleGuard roles={[ADMIN]}>
+                            <ModifierCategorie />
+                        </RoleGuard>
+                    }
+                />
+
                 <Route
                     path="/consulterCategorie/:id"
                     element={
@@ -169,13 +134,64 @@ function AppRoutes() {
                     }
                 />
                 <Route
-                    path="/modifierCategorie/:id"
+                    path="/affectations"
                     element={
                         <RoleGuard roles={[ADMIN]}>
-                            <ModifierCategorie />
+                            <Affectations />
                         </RoleGuard>
                     }
                 />
+                <Route
+                    path="/ajouterAffectation"
+                    element={
+                        <RoleGuard roles={[ADMIN]}>
+                            <AjouterAffectation />
+                        </RoleGuard>
+                    }
+                />
+
+                <Route
+                    path="/consulterAffectation/:id"
+                    element={
+                        <RoleGuard roles={[ADMIN]}>
+                            <ConsulterAffectation />
+                        </RoleGuard>
+                    }
+                />
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <Route
+                    path="/incidents"
+                    element={
+                        <RoleGuard roles={[ADMIN, TECHNICIAN]}>
+                            <Incidents />
+                        </RoleGuard>
+                    }
+                />
+
+
+                {/*
+
+                <Route
+                    path="/modifierAffectation/:id"
+                    element={
+                        <RoleGuard roles={[ADMIN]}>
+                            <ModifierAffectation />
+                        </RoleGuard>
+                    }
+                />
+
 
                 <Route
                     path="/employes"
@@ -210,14 +226,7 @@ function AppRoutes() {
                     }
                 />
 
-                <Route
-                    path="/incidents"
-                    element={
-                        <RoleGuard roles={[ADMIN, TECHNICIAN]}>
-                            <Incidents />
-                        </RoleGuard>
-                    }
-                />
+
                 <Route
                     path="/ajouterIncident"
                     element={

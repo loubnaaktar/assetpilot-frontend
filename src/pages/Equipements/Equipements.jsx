@@ -3,7 +3,7 @@ import { getEquipements, supprimerEquipement } from "../../service/EquipementSer
 import { getCategories } from "../../service/CategoryService.js";
 import { Link } from "react-router-dom";
 import { MdQrCode } from "react-icons/md";
-import { FiRefreshCw, FiX } from "react-icons/fi";
+import { FiRefreshCw, FiX, FiEdit, FiTrash2 } from "react-icons/fi";
 import { QRCodeSVG } from "qrcode.react";
 import "../../Style/Liste.css";
 
@@ -211,20 +211,25 @@ function Equipements() {
                             </td>
                             <td className="actions-cell">
                                 <button
-                                    className="btn-action btn-consulter"
+                                    className="btn-icon-action btn-consulter"
                                     onClick={() => setSelectedQrEquipement(equipement)}
                                     title="Voir QR Code"
                                 >
-                                    <MdQrCode  /> QR
+                                    <MdQrCode />
                                 </button>
-                                <Link className="btn-action btn-modifier" to={`/modifierEquipement/${equipement.id}`}>
-                                    Modifier
+                                <Link
+                                    className="btn-icon-action btn-modifier"
+                                    to={`/modifierEquipement/${equipement.id}`}
+                                    title="Modifier"
+                                >
+                                    <FiEdit />
                                 </Link>
                                 <button
-                                    className="btn-action btn-supprimer"
+                                    className="btn-icon-action btn-supprimer"
                                     onClick={() => handleDelete(equipement.id)}
+                                    title="Supprimer"
                                 >
-                                    Supprimer
+                                    <FiTrash2 />
                                 </button>
                             </td>
                         </tr>
