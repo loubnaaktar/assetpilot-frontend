@@ -14,7 +14,7 @@ import { getRoleFromToken } from '../../utils/auth.js';
 
 function Sidebar() {
     const navigate = useNavigate();
-    const role = getRoleFromToken() || "EMPLOYEE";
+    const role = getRoleFromToken() || "EMPLOYE";
 
     const handleLogout = () => {
         localStorage.clear();
@@ -35,7 +35,7 @@ function Sidebar() {
                     </NavLink>
                 )}
 
-                {(role === "ADMIN" || role === "TECHNICIAN") && (
+                {(role === "ADMIN" || role === "TECHNICIEN") && (
                     <NavLink to="/equipements" className="sidebar-item">
                         <FiArchive className="sidebar-icon" />
                         <span>Équipements</span>
@@ -56,13 +56,13 @@ function Sidebar() {
                     </NavLink>
                 )}
 
-                {role === "EMPLOYEE" ? (
+                {role === "EMPLOYE" ? (
                     <NavLink to="/ajouterIncident" className="sidebar-item">
                         <FiTool className="sidebar-icon" />
                         <span>Signaler un incident</span>
                     </NavLink>
                 ) : (
-                    (role === "ADMIN" || role === "TECHNICIAN") && (
+                    (role === "ADMIN" || role === "TECHNICIEN") && (
                         <NavLink to="/incidents" className="sidebar-item">
                             <FiTool className="sidebar-icon" />
                             <span>Incidents et Maintenance</span>

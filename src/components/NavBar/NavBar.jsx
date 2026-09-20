@@ -3,12 +3,12 @@ import './NavBar.css';
 import { getRoleFromToken } from "../../utils/auth.js";
 
 function NavBar() {
-    const role = getRoleFromToken() || "EMPLOYEE";
+    const role = getRoleFromToken() || "EMPLOYE";
 
     const roleLabel = {
         ADMIN: "Administrateur",
-        TECHNICIAN: "Technicien",
-        EMPLOYEE: "Employé",
+        TECHNICIEN: "Technicien",
+        EMPLOYE: "Employé",
     };
 
     return (

@@ -30,7 +30,7 @@ import ModifierEquipement from "../pages/Equipements/ModifierEquipement";
 
 import Incidents from "../pages/Incidents/Incidents";
 //import AjouterIncident from "../pages/Incidents/AjouterIncident";
-//import ConsulterIncident from "../pages/Incidents/ConsulterIncident";
+import ConsulterIncident from "../pages/Incidents/ConsulterIncident";
 //import ModifierIncident from "../pages/Incidents/ModifierIncident";
 
 //import Techniciens from "../pages/Techniciens/Techniciens";
@@ -38,16 +38,16 @@ import Incidents from "../pages/Incidents/Incidents";
 //import ConsulterTechnicien from "../pages/Techniciens/ConsulterTechnicien";
 //import ModifierTechnicien from "../pages/Techniciens/ModifierTechnicien";
 
-//import Utilisateurs from "../pages/Utilisateurs/Utilisateurs";
-//import AjouterUtilisateur from "../pages/Utilisateurs/AjouterUtilisateur";
-//import ConsulterUtilisateur from "../pages/Utilisateurs/ConsulterUtilisateur";
+import Utilisateurs from "../pages/Utilisateurs/Utilisateurs";
+import AjouterUtilisateur from "../pages/Utilisateurs/AjouterUtilisateur";
+import ConsulterUtilisateur from "../pages/Utilisateurs/ConsulterUtilisateur";
 //import ModifierUtilisateur from "../pages/Utilisateurs/ModifierUtilisateur";
 
 //import NotFound from "../pages/NotFound";
 
 const ADMIN = "ADMIN";
-const EMPLOYEE = "EMPLOYEE";
-const TECHNICIAN = "TECHNICIAN";
+const EMPLOYE = "EMPLOYE";
+const TECHNICIEN = "TECHNICIEN";
 
 function AppRoutes() {
     return (
@@ -76,7 +76,7 @@ function AppRoutes() {
                 <Route
                     path="/equipements"
                     element={
-                        <RoleGuard roles={[ADMIN, TECHNICIAN]}>
+                        <RoleGuard roles={[ADMIN, TECHNICIEN]}>
                             <Equipements />
                         </RoleGuard>
                     }
@@ -159,28 +159,50 @@ function AppRoutes() {
                     }
                 />
 
-
-
-
-
-
-
-
-
-
-
-
-
                 <Route
                     path="/incidents"
                     element={
-                        <RoleGuard roles={[ADMIN, TECHNICIAN]}>
+                        <RoleGuard roles={[ADMIN, TECHNICIEN]}>
                             <Incidents />
                         </RoleGuard>
                     }
                 />
 
+                <Route
+                    path="/consulterIncident/:id"
+                    element={
+                        <RoleGuard roles={[ADMIN, TECHNICIEN]}>
+                            <ConsulterIncident />
+                        </RoleGuard>
+                    }
+                />
 
+                <Route
+                    path="/utilisateurs"
+                    element={
+                        <RoleGuard roles={[ADMIN]}>
+                            <Utilisateurs />
+                        </RoleGuard>
+                    }
+                />
+
+                <Route
+                    path="/ajouterUtilisateur"
+                    element={
+                        <RoleGuard roles={[ADMIN]}>
+                            <AjouterUtilisateur />
+                        </RoleGuard>
+                    }
+                />
+
+                <Route
+                    path="/consulterUtilisateur/:id"
+                    element={
+                        <RoleGuard roles={[ADMIN]}>
+                            <ConsulterUtilisateur />
+                        </RoleGuard>
+                    }
+                />
                 {/*
 
                 <Route
@@ -192,15 +214,6 @@ function AppRoutes() {
                     }
                 />
 
-
-                <Route
-                    path="/employes"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <Employes />
-                        </RoleGuard>
-                    }
-                />
                 <Route
                     path="/ajouterEmploye"
                     element={
@@ -230,23 +243,15 @@ function AppRoutes() {
                 <Route
                     path="/ajouterIncident"
                     element={
-                        <RoleGuard roles={[EMPLOYEE]}>
+                        <RoleGuard roles={[EMPLOYE]}>
                             <AjouterIncident />
-                        </RoleGuard>
-                    }
-                />
-                <Route
-                    path="/consulterIncident/:id"
-                    element={
-                        <RoleGuard roles={[ADMIN, TECHNICIAN]}>
-                            <ConsulterIncident />
                         </RoleGuard>
                     }
                 />
                 <Route
                     path="/modifierIncident/:id"
                     element={
-                        <RoleGuard roles={[TECHNICIAN]}>
+                        <RoleGuard roles={[TECHNICIEN]}>
                             <ModifierIncident />
                         </RoleGuard>
                     }
@@ -268,14 +273,7 @@ function AppRoutes() {
                         </RoleGuard>
                     }
                 />
-                <Route
-                    path="/consulterTechnicien/:id"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <ConsulterTechnicien />
-                        </RoleGuard>
-                    }
-                />
+
                 <Route
                     path="/modifierTechnicien/:id"
                     element={
@@ -285,30 +283,9 @@ function AppRoutes() {
                     }
                 />
 
-                <Route
-                    path="/utilisateurs"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <Utilisateurs />
-                        </RoleGuard>
-                    }
-                />
-                <Route
-                    path="/ajouterUtilisateur"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <AjouterUtilisateur />
-                        </RoleGuard>
-                    }
-                />
-                <Route
-                    path="/consulterUtilisateur/:id"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <ConsulterUtilisateur />
-                        </RoleGuard>
-                    }
-                />
+
+
+
                 <Route
                     path="/modifierUtilisateur/:id"
                     element={

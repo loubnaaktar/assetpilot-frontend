@@ -256,7 +256,7 @@ function Equipements() {
                 </button>
             </div>
 
-            {/* MODAL QR CODE */}
+            {}
             {selectedQrEquipement && (
                 <div className="modal-overlay">
                     <div className="modal-content">

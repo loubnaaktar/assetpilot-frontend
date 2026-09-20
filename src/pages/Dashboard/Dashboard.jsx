@@ -32,40 +32,44 @@ function Dashboard() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        Promise.all([
+        Promise.allSettled([
             getStatistiques(),
-            getIncidents({ page: 0, size: 50 }) // N-jbdou les incidents pour le calcul du graphe
-        ])
-            .then(([statsRes, incidentsRes]) => {
-                setStats(statsRes.data);
-                const incidentsList = incidentsRes.data.content || incidentsRes.data || [];
-                setRecentIncidents(incidentsList.slice(0, 5)); // Khallina 5 l-derniers f la liste
+            getIncidents({ page: 0, size: 50 }) 
+        ]).then(([statsResult, incidentsResult]) => {
+            if (statsResult.status === "fulfilled") {
+                setStats(statsResult.value.data);
+            } else {
+                console.error("Erreur lors du chargement des statistiques", statsResult.reason);
+            }
 
-                // Calculer le nombre d'incidents par jour de la semaine (Lun -> Dim)
+            if (incidentsResult.status === "fulfilled") {
+                const incidentsList = incidentsResult.value.data.content || incidentsResult.value.data || [];
+                setRecentIncidents(incidentsList.slice(0, 5)); 
+
+                
                 const counts = [0, 0, 0, 0, 0, 0, 0];
                 incidentsList.forEach((inc) => {
                     if (inc.dateDeclaration) {
                         const day = new Date(inc.dateDeclaration).getDay();
-                        // day: 0 = Dimanche, 1 = Lundi, ...
-                        const index = day === 0 ? 6 : day - 1; // Alignement: Lun=0 ... Dim=6
+                        
+                        const index = day === 0 ? 6 : day - 1; 
                         counts[index] += 1;
                     }
                 });
                 setWeeklyIncidents(counts);
+            } else {
+                console.error("Erreur lors du chargement des incidents", incidentsResult.reason);
+            }
 
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Erreur lors du chargement des données", error);
-                setLoading(false);
-            });
+            setLoading(false);
+        });
     }, []);
 
     if (loading) {
         return <div className="loading-text">Chargement du tableau de bord...</div>;
     }
 
-    // --- Données Donut Chart ---
+    
     const doughnutData = {
         labels: ["Affectés", "En stock", "En panne"],
         datasets: [
@@ -86,7 +90,7 @@ function Dashboard() {
         plugins: { legend: { display: false } },
     };
 
-    // --- Données Line Chart par Jours de la Semaine ---
+    
     const lineData = {
         labels: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
         datasets: [
@@ -117,7 +121,6 @@ function Dashboard() {
 
     return (
         <div className="dashboard-container">
-            {/* Header */}
             <div className="dashboard-header">
                 <div>
                     <h2>Aperçu du système</h2>
@@ -125,7 +128,6 @@ function Dashboard() {
                 </div>
             </div>
 
-            {/* KPI Cards */}
             <div className="kpi-grid">
                 <div className="kpi-card">
                     <div className="kpi-header">
@@ -160,7 +162,6 @@ function Dashboard() {
                 </div>
             </div>
 
-            {/* Graphiques */}
             <div className="charts-grid">
                 <div className="chart-card">
                     <h3>Statut des équipements</h3>
@@ -189,7 +190,6 @@ function Dashboard() {
                 </div>
             </div>
 
-            {/* Derniers Incidents Réels */}
             <div className="dashboard-card">
                 <div className="card-header">
                     <h3>Derniers incidents signalés</h3>

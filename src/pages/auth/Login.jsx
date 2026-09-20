@@ -46,7 +46,7 @@ function Login() {
 
     return (
         <div className="login-container">
-            {/* Côté Gauche - Full Background Image */}
+            {}
             <div className="login-left">
                 <div className="left-content">
                     <div className="brand-card">
@@ -78,7 +78,7 @@ function Login() {
                 </div>
             </div>
 
-            {/* Côté Droit - Formulaire */}
+            {}
             <div className="login-right">
                 <div className="form-box">
                     <h2 className="login-title">Bon retour</h2>

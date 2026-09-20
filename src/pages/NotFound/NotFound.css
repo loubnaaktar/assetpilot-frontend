@@ -1,4 +1,4 @@
-.acces-refuse-container {
+.notfound-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,17 +8,23 @@
     text-align: center;
 }
 
-.acces-refuse-container h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #dc2626;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.notfound-code {
+    font-size: 5rem;
+    font-weight: 800;
+    color: #2563eb;
+    margin: 0;
+    line-height: 1;
 }
 
-.acces-refuse-container p {
+.notfound-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
+
+.notfound-text {
     font-size: 1rem;
     color: #64748b;
     max-width: 420px;
@@ -26,7 +32,7 @@
     line-height: 1.5;
 }
 
-.acces-refuse-container .btn-retour {
+.notfound-btn {
     background-color: #0f172a;
     color: #ffffff;
     border: none;
@@ -38,11 +44,11 @@
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.acces-refuse-container .btn-retour:hover {
+.notfound-btn:hover {
     background-color: #1e293b;
     transform: translateY(-1px);
 }
 
-.acces-refuse-container .btn-retour:active {
+.notfound-btn:active {
     transform: translateY(0);
 }
