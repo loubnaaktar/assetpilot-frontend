@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { creerEquipement } from "../../service/EquipementService.js";
-import { getCategories } from "../../service/CategoryService.js";
+import { creerEquipement } from "../../../service/EquipementService.js";
+import { getCategories } from "../../../service/CategoryService.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import "../../Style/form.css";
+import "../../../Style/form.css";
 
 const schema = yup.object({
     numeroSerie: yup.string().required("Le numéro de série est obligatoire"),

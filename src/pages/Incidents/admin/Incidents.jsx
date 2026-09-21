@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { getIncidents, exporterIncidentsExcel } from "../../service/IncidentService.js";
+import { getIncidents, exporterIncidentsExcel } from "../../../service/IncidentService.js";
 import { Link } from "react-router-dom";
 import { FiRefreshCw, FiEye, FiUserCheck, FiDownload } from "react-icons/fi";
 import AssignerIncidentModal from "./AssignerIncidentModal.jsx";
-import "../../Style/Liste.css";
+import "../../../Style/Liste.css";
 
 function Incidents() {
     const [incidents, setIncidents] = useState([]);

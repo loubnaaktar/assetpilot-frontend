@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './NavBar.css';
 import { getRoleFromToken } from "../../utils/auth.js";
 
@@ -25,13 +26,13 @@ function NavBar() {
 
             <div className="navbar-right">
                 <span className="portal-text">Portail {roleLabel[role] || role}</span>
-                <div className="user-profile">
+                <NavLink to="/profil" className="profile-menu-button">
                     <div className="avatar">AP</div>
                     <div className="user-info">
                         <span className="user-name">Utilisateur</span>
                         <span className="user-role">{roleLabel[role] || role}</span>
                     </div>
-                </div>
+                </NavLink>
             </div>
         </header>
     );

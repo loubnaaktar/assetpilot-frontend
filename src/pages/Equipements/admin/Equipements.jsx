@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { getEquipements, supprimerEquipement } from "../../service/EquipementService.js";
-import { getCategories } from "../../service/CategoryService.js";
+import { getEquipements, supprimerEquipement } from "../../../service/EquipementService.js";
+import { getCategories } from "../../../service/CategoryService.js";
 import { Link } from "react-router-dom";
 import { MdQrCode } from "react-icons/md";
 import { FiRefreshCw, FiX, FiEdit, FiTrash2 } from "react-icons/fi";
 import { QRCodeSVG } from "qrcode.react";
-import "../../Style/Liste.css";
+import "../../../Style/Liste.css";
 
 function Equipements() {
     const [equipements, setEquipements] = useState([]);

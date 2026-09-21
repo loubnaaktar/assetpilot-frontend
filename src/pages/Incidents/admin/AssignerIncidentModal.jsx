@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { assignerIncident } from "../../service/IncidentService.js";
-import { getSpecialites, getTechniciensParSpecialite } from "../../service/TechnicienService.js";
+import { assignerIncident } from "../../../service/IncidentService.js";
+import { getSpecialites, getTechniciensParSpecialite } from "../../../service/TechnicienService.js";
 import { FiX, FiUserCheck } from "react-icons/fi";
 
 function AssignerIncidentModal({ incident, onClose, onSuccess }) {

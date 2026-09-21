@@ -11,3 +11,9 @@ export const getUtilisateurByEmail = (email) => api.get(`/utilisateurs/email/${e
 export const modifierUtilisateur = (id, data) => api.put(`/utilisateurs/${id}`, data);
 
 export const supprimerUtilisateur = (id) => api.delete(`/utilisateurs/${id}`);
+
+export const getMonProfil = () => api.get("/utilisateurs/profil");
+
+export const modifierMonProfil = (data) => api.put("/utilisateurs/profil", data);
+
+export const changerMotDePasse = (data) => api.put("/utilisateurs/changer-password", data);

@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "../pages/auth/Login";
 import Landing from "../pages/Landing/Landing";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import Profil from "../pages/Profil/Profil";
 //import AccesRefuse from "../pages/AccesRefuse/AccesRefuse";
 
 import MainLayout from "../layouts/MainLayout";
@@ -24,13 +25,13 @@ import ModifierCategorie from "../pages/Categories/ModifierCategorie";
 //import ConsulterEmploye from "../pages/Employes/ConsulterEmploye";
 //import ModifierEmploye from "../pages/Employes/ModifierEmploye";
 
-import Equipements from "../pages/Equipements/Equipements";
-import AjouterEquipement from "../pages/Equipements/AjouterEquipement";
-import ModifierEquipement from "../pages/Equipements/ModifierEquipement";
+import Equipements from "../pages/Equipements/admin/Equipements.jsx";
+import AjouterEquipement from "../pages/Equipements/admin/AjouterEquipement.jsx";
+import ModifierEquipement from "../pages/Equipements/admin/ModifierEquipement.jsx";
 
-import Incidents from "../pages/Incidents/Incidents";
+import Incidents from "../pages/Incidents/admin/Incidents.jsx";
 //import AjouterIncident from "../pages/Incidents/AjouterIncident";
-import ConsulterIncident from "../pages/Incidents/ConsulterIncident";
+import ConsulterIncident from "../pages/Incidents/admin/ConsulterIncident.jsx";
 //import ModifierIncident from "../pages/Incidents/ModifierIncident";
 
 //import Techniciens from "../pages/Techniciens/Techniciens";
@@ -71,6 +72,11 @@ function AppRoutes() {
                             <Dashboard />
                         </RoleGuard>
                     }
+                />
+
+                <Route
+                    path="/profil"
+                    element={<Profil />}
                 />
 
                 <Route

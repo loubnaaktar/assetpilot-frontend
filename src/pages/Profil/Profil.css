@@ -1,0 +1,19 @@
+.profil-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profil-message-success {
+    color: #16a34a;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.profil-message-error {
+    color: #dc2626;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+}

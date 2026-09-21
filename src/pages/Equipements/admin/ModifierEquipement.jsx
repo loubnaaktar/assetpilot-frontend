@@ -3,9 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { getEquipementById, modifierEquipement } from "../../service/EquipementService.js";
-import { getCategories } from "../../service/CategoryService.js";
-import "../../Style/form.css";
+import { getEquipementById, modifierEquipement } from "../../../service/EquipementService.js";
+import { getCategories } from "../../../service/CategoryService.js";
+import "../../../Style/form.css";
 
 const schema = yup.object({
     numeroSerie: yup.string().required("Le numéro de série est obligatoire"),

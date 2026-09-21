@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getIncidentById } from "../../service/IncidentService.js";
-import "../../Style/consulter.css";
+import { getIncidentById } from "../../../service/IncidentService.js";
+import "../../../Style/consulter.css";
 
 function ConsulterIncident() {
     const { id } = useParams();
