@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { creerCategorie } from "../../service/CategoryService.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../Style/form.css";
 
 const schema = yup.object({
@@ -12,6 +14,7 @@ const schema = yup.object({
 
 function AjouterCategorie() {
     const navigate = useNavigate();
+    const [error, setError] = useState(null);
 
     const {
         register,
@@ -22,11 +25,12 @@ function AjouterCategorie() {
     });
 
     const onSubmit = async (data) => {
+        setError(null);
         try {
             await creerCategorie(data);
             navigate("/categories");
-        } catch (error) {
-            console.error("Erreur lors de la création de la catégorie :", error);
+        } catch (err) {
+            setError("Erreur lors de la création de la catégorie.");
         }
     };
 
@@ -35,6 +39,8 @@ function AjouterCategorie() {
             <main className="form-content-wrapper">
                 <div className="form-card-container">
                     <h3 className="form-form-title">Ajouter une nouvelle catégorie</h3>
+
+                    <ErrorBanner type="error" message={error} />
 
                     <form onSubmit={handleSubmit(onSubmit)} className="form-form">
                         <div className="form-form-group">

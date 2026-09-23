@@ -6,6 +6,8 @@ import { login } from "../../service/AuthService.js";
 import { useNavigate } from "react-router-dom";
 import { FiMail, FiLock, FiArrowRight } from "react-icons/fi";
 import logoImg from "../../assets/logo .png";
+import { getRoleFromToken } from "../../utils/auth.js";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "./Login.css";
 
 const schema = yup.object({
@@ -35,8 +37,17 @@ function Login() {
             if (response.data.token) {
                 localStorage.setItem("token", response.data.token);
             }
+
+            const role = getRoleFromToken();
+
+            const pageAccueil = {
+                ADMIN: "/dashboard",
+                TECHNICIEN: "/suivi-incidents",
+                EMPLOYE: "/mesEquipements",
+            };
+
             setMessage({ type: "success", text: "Connexion réussie" });
-            navigate("/dashboard");
+            navigate(pageAccueil[role] || "/dashboard");
         } catch (error) {
             const errorMsg =
                 error.response?.data?.message || "Email ou mot de passe incorrect";
@@ -46,7 +57,6 @@ function Login() {
 
     return (
         <div className="login-container">
-            {}
             <div className="login-left">
                 <div className="left-content">
                     <div className="brand-card">
@@ -87,11 +97,7 @@ function Login() {
                     </p>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="login-form">
-                        {message && (
-                            <div className={`message-banner ${message.type}`}>
-                                {message.text}
-                            </div>
-                        )}
+                        <ErrorBanner type={message?.type} message={message?.text} />
 
                         <div className="login-group">
                             <label className="login-label">Adresse e-mail</label>

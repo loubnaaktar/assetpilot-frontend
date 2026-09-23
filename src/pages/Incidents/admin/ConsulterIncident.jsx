@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getIncidentById } from "../../../service/IncidentService.js";
+import { getRoleFromToken } from "../../../utils/auth.js";
+import ErrorBanner from "../../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../../Style/consulter.css";
 
 function ConsulterIncident() {
@@ -11,13 +13,14 @@ function ConsulterIncident() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const pageRetour = getRoleFromToken() === "TECHNICIEN" ? "/suivi-incidents" : "/incidents";
+
     useEffect(() => {
         getIncidentById(id)
             .then((res) => {
                 setIncident(res.data);
             })
-            .catch((err) => {
-                console.error("Erreur lors du chargement de l'incident :", err);
+            .catch(() => {
                 setError("Impossible de charger les détails de l'incident.");
             })
             .finally(() => {
@@ -48,10 +51,10 @@ function ConsulterIncident() {
     if (error) {
         return (
             <div className="consulter-main-area">
-                <p className="consulter-error">{error}</p>
+                <ErrorBanner type="error" message={error} />
                 <button
                     className="consulter-btn-retour"
-                    onClick={() => navigate("/incidents")}
+                    onClick={() => navigate(pageRetour)}
                 >
                     Retour
                 </button>
@@ -136,7 +139,7 @@ function ConsulterIncident() {
                     <button
                         type="button"
                         className="consulter-btn-retour"
-                        onClick={() => navigate("/incidents")}
+                        onClick={() => navigate(pageRetour)}
                     >
                         Retour
                     </button>

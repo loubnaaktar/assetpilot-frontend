@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getCategories, supprimerCategorie } from "../../service/CategoryService.js";
 import { Link } from "react-router-dom";
 import { FiRefreshCw, FiEye, FiEdit, FiTrash2 } from "react-icons/fi";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../Style/Liste.css";
 
 function Categories() {
@@ -38,7 +39,6 @@ function Categories() {
             })
             .catch((error) => {
                 setError("Erreur lors du chargement des catégories.");
-                console.error("Erreur lors du chargement des catégories :", error);
             })
             .finally(() => {
                 setLoading(false);
@@ -72,8 +72,7 @@ function Categories() {
                 await supprimerCategorie(id);
                 fetchCategories();
             } catch (err) {
-                console.error("Erreur lors de la suppression:", err);
-                alert("Erreur lors de la suppression de la catégorie.");
+                setError("Erreur lors de la suppression de la catégorie.");
             }
         }
     };
@@ -86,16 +85,9 @@ function Categories() {
         );
     }
 
-    if (error) {
-        return (
-            <div className="clients-container">
-                <p style={{ color: "red" }}>{error}</p>
-            </div>
-        );
-    }
-
     return (
         <div className="clients-container">
+            <ErrorBanner type="error" message={error} />
             <div className="clients-header">
                 <h2 className="clients-titre">Gestion des Catégories</h2>
                 <Link className="btn-ajouter" to="/ajouterCategorie">+ Ajouter une catégorie</Link>

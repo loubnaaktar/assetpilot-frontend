@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getEquipementById, modifierEquipement } from "../../../service/EquipementService.js";
 import { getCategories } from "../../../service/CategoryService.js";
+import ErrorBanner from "../../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../../Style/form.css";
 
 const schema = yup.object({
@@ -21,6 +22,7 @@ function ModifierEquipement() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [submitError, setSubmitError] = useState(null);
     const [categories, setCategories] = useState([]);
 
     const {
@@ -51,8 +53,7 @@ function ModifierEquipement() {
                     statut: data.statut || "EN_STOCK",
                 });
             })
-            .catch((err) => {
-                console.error("Erreur lors du chargement de l'équipement :", err);
+            .catch(() => {
                 setError("Impossible de charger les données de l'équipement.");
             })
             .finally(() => {
@@ -65,6 +66,7 @@ function ModifierEquipement() {
     }, [id, reset]);
 
     const onSubmit = async (data) => {
+        setSubmitError(null);
         try {
             const payload = {
                 numeroSerie: data.numeroSerie,
@@ -77,7 +79,7 @@ function ModifierEquipement() {
             await modifierEquipement(id, payload);
             navigate("/equipements");
         } catch (err) {
-            console.error("Erreur lors de la modification :", err);
+            setSubmitError("Erreur lors de la modification de l'équipement.");
         }
     };
 
@@ -92,7 +94,7 @@ function ModifierEquipement() {
     if (error) {
         return (
             <div className="form-main-area">
-                <p className="form-error">{error}</p>
+                <ErrorBanner type="error" message={error} />
                 <button
                     className="form-btn-annuler"
                     onClick={() => navigate("/equipements")}
@@ -108,6 +110,8 @@ function ModifierEquipement() {
             <main className="form-content-wrapper">
                 <div className="form-card-container">
                     <h3 className="form-form-title">Modifier l'équipement</h3>
+
+                    <ErrorBanner type="error" message={submitError} />
 
                     <form onSubmit={handleSubmit(onSubmit)} className="form-form">
                         <div className="form-form-group">

@@ -1,10 +1,19 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FiUser } from 'react-icons/fi';
 import './NavBar.css';
 import { getRoleFromToken } from "../../utils/auth.js";
+import { getMonProfil } from "../../service/UtilisateurService.js";
 
 function NavBar() {
     const role = getRoleFromToken() || "EMPLOYE";
+    const [profil, setProfil] = useState(null);
+
+    useEffect(() => {
+        getMonProfil()
+            .then((res) => setProfil(res.data))
+            .catch(() => setProfil(null));
+    }, []);
 
     const roleLabel = {
         ADMIN: "Administrateur",
@@ -25,11 +34,14 @@ function NavBar() {
             </div>
 
             <div className="navbar-right">
-                <span className="portal-text">Portail {roleLabel[role] || role}</span>
-                <NavLink to="/profil" className="profile-menu-button">
-                    <div className="avatar">AP</div>
+                <NavLink to="/profil" className="profile-menu-button" title="Mon profil">
+                    <div className="avatar">
+                        <FiUser />
+                    </div>
                     <div className="user-info">
-                        <span className="user-name">Utilisateur</span>
+                        <span className="user-name">
+                            {profil ? `${profil.prenom} ${profil.nom}` : "Utilisateur"}
+                        </span>
                         <span className="user-role">{roleLabel[role] || role}</span>
                     </div>
                 </NavLink>

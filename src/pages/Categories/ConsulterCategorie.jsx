@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getCategorieById } from "../../service/CategoryService.js";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../Style/consulter.css";
 
 function ConsulterCategorie() {
@@ -16,8 +17,7 @@ function ConsulterCategorie() {
             .then((res) => {
                 setCategorie(res.data);
             })
-            .catch((err) => {
-                console.error("Erreur lors du chargement de la catégorie :", err);
+            .catch(() => {
                 setError("Impossible de charger les détails de la catégorie.");
             })
             .finally(() => {
@@ -36,7 +36,7 @@ function ConsulterCategorie() {
     if (error) {
         return (
             <div className="consulter-main-area">
-                <p className="consulter-error">{error}</p>
+                <ErrorBanner type="error" message={error} />
                 <button
                     className="consulter-btn-retour"
                     onClick={() => navigate("/categories")}

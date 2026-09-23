@@ -5,6 +5,7 @@ import { getCategories } from "../../../service/CategoryService.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import ErrorBanner from "../../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../../Style/form.css";
 
 const schema = yup.object({
@@ -19,6 +20,7 @@ const schema = yup.object({
 function AjouterEquipement() {
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
+    const [error, setError] = useState(null);
 
     const {
         register,
@@ -47,6 +49,7 @@ function AjouterEquipement() {
     }, [getValues, setValue]);
 
     const onSubmit = async (data) => {
+        setError(null);
         try {
             const categorie = categories.find(
                 (c) => c.nom.trim().toLowerCase() === data.categorie.trim().toLowerCase()
@@ -62,8 +65,8 @@ function AjouterEquipement() {
             };
             await creerEquipement(payload);
             navigate("/equipements");
-        } catch (error) {
-            console.error("Erreur lors de l'ajout de l'équipement :", error);
+        } catch (err) {
+            setError("Erreur lors de l'ajout de l'équipement.");
         }
     };
 
@@ -72,6 +75,8 @@ function AjouterEquipement() {
             <main className="form-content-wrapper">
                 <div className="form-card-container">
                     <h3 className="form-form-title">Ajouter un nouvel équipement</h3>
+
+                    <ErrorBanner type="error" message={error} />
 
                     <form onSubmit={handleSubmit(onSubmit)} className="form-form">
                         <div className="form-form-group">

@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FiEye, FiTrash2 } from "react-icons/fi";
+import { FiEdit, FiEye, FiTrash2 } from "react-icons/fi";
 import { getEmployes, supprimerEmploye } from "../../service/EmployeService.js";
 import { getTechniciens, supprimerTechnicien } from "../../service/TechnicienService.js";
-import api from "../../api/axios.js";
+import { getUtilisateurs, supprimerUtilisateur } from "../../service/UtilisateurService.js";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../Style/Liste.css";
 
 function Utilisateurs() {
     const [type, setType] = useState("EMPLOYE"); 
     const [liste, setListe] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         setLoading(true);
+        setError(null);
 
         if (type === "EMPLOYE") {
             getEmployes()
@@ -25,7 +28,7 @@ function Utilisateurs() {
                 .catch(() => setListe([]))
                 .finally(() => setLoading(false));
         } else if (type === "ADMIN") {
-            api.get("/utilisateurs")
+            getUtilisateurs()
                 .then((res) => {
                     const data = res.data.content || res.data;
                     
@@ -41,24 +44,23 @@ function Utilisateurs() {
             try {
                 if (type === "EMPLOYE") await supprimerEmploye(id);
                 else if (type === "TECHNICIEN") await supprimerTechnicien(id);
-                else await api.delete(`/utilisateurs/${id}`);
+                else await supprimerUtilisateur(id);
 
-                
                 setListe(liste.filter((item) => item.id !== id));
             } catch {
-                alert("Erreur lors de la suppression.");
+                setError("Erreur lors de la suppression.");
             }
         }
     };
 
     return (
         <div className="clients-container">
+            <ErrorBanner type="error" message={error} />
             <div className="clients-header">
                 <h2 className="clients-titre">Gestion des Utilisateurs</h2>
                 <Link className="btn-ajouter" to="/ajouterUtilisateur">+ Ajouter un utilisateur</Link>
             </div>
 
-            {}
             <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
                 <button
                     className={type === "EMPLOYE" ? "btn-ajouter" : "btn-pagination"}
@@ -112,6 +114,9 @@ function Utilisateurs() {
                                 <td className="actions-cell">
                                     <Link className="btn-icon-action btn-consulter" to={`/consulterUtilisateur/${u.id}`}>
                                         <FiEye />
+                                    </Link>
+                                    <Link className="btn-icon-action btn-modifier" to={`/modifierUtilisateur/${u.id}`}>
+                                        <FiEdit />
                                     </Link>
                                     <button className="btn-icon-action btn-supprimer" onClick={() => handleDelete(u.id)}>
                                         <FiTrash2 />

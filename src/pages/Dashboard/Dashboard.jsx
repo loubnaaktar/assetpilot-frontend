@@ -13,6 +13,7 @@ import {
 } from "chart.js";
 import { Doughnut, Line } from "react-chartjs-2";
 import { FiBox, FiCheckCircle, FiAlertTriangle, FiLayers, FiTool } from "react-icons/fi";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "./Dashboard.css";
 
 ChartJS.register(
@@ -30,6 +31,7 @@ function Dashboard() {
     const [recentIncidents, setRecentIncidents] = useState([]);
     const [weeklyIncidents, setWeeklyIncidents] = useState([0, 0, 0, 0, 0, 0, 0]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         Promise.allSettled([
@@ -39,11 +41,17 @@ function Dashboard() {
             if (statsResult.status === "fulfilled") {
                 setStats(statsResult.value.data);
             } else {
-                console.error("Erreur lors du chargement des statistiques", statsResult.reason);
+                setError("Erreur lors du chargement des statistiques.");
             }
 
             if (incidentsResult.status === "fulfilled") {
                 const incidentsList = incidentsResult.value.data.content || incidentsResult.value.data || [];
+
+                
+                incidentsList.sort((a, b) => {
+                    return new Date(b.dateDeclaration) - new Date(a.dateDeclaration);
+                });
+
                 setRecentIncidents(incidentsList.slice(0, 5)); 
 
                 
@@ -58,7 +66,7 @@ function Dashboard() {
                 });
                 setWeeklyIncidents(counts);
             } else {
-                console.error("Erreur lors du chargement des incidents", incidentsResult.reason);
+                setError("Erreur lors du chargement des incidents.");
             }
 
             setLoading(false);
@@ -121,6 +129,7 @@ function Dashboard() {
 
     return (
         <div className="dashboard-container">
+            <ErrorBanner type="error" message={error} />
             <div className="dashboard-header">
                 <div>
                     <h2>Aperçu du système</h2>

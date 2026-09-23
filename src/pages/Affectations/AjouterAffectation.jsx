@@ -6,6 +6,7 @@ import { getEmployes } from "../../service/EmployeService.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../Style/form.css";
 
 const schema = yup.object({
@@ -21,6 +22,7 @@ function AjouterAffectation() {
     const [employes, setEmployes] = useState([]);
     const [rechercheEquipement, setRechercheEquipement] = useState("");
     const [rechercheEmploye, setRechercheEmploye] = useState("");
+    const [error, setError] = useState(null);
 
     const {
         register,
@@ -70,6 +72,7 @@ function AjouterAffectation() {
     });
 
     const onSubmit = async (data) => {
+        setError(null);
         try {
             const payload = {
                 dateDebut: data.dateDebut,
@@ -79,9 +82,8 @@ function AjouterAffectation() {
             };
             await creerAffectation(payload);
             navigate("/affectations");
-        } catch (error) {
-            const message = error.response?.data?.message || "Erreur lors de la création de l'affectation.";
-            alert(message);
+        } catch (err) {
+            setError(err.response?.data?.message || "Erreur lors de la création de l'affectation.");
         }
     };
 
@@ -90,6 +92,8 @@ function AjouterAffectation() {
             <main className="form-content-wrapper">
                 <div className="form-card-container">
                     <h3 className="form-form-title">Créer une nouvelle affectation</h3>
+
+                    <ErrorBanner type="error" message={error} />
 
                     <form onSubmit={handleSubmit(onSubmit)} className="form-form">
                         <div className="form-form-group">

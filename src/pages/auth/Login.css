@@ -165,14 +165,6 @@
     min-height: 14px;
 }
 
-.message-banner {
-    padding: 10px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-}
-.message-banner.success { background-color: #dcfce7; color: #166534; }
-.message-banner.error { background-color: #fee2e2; color: #991b1b; }
-
 .login-btn {
     width: 100%;
     padding: 12px;

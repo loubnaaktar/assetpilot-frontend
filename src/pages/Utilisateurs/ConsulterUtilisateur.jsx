@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import api from "../../api/axios.js";
+import { getUtilisateurById } from "../../service/UtilisateurService.js";
 import { getEmployeById } from "../../service/EmployeService.js";
 import { getTechnicienById } from "../../service/TechnicienService.js";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../Style/consulter.css";
 
 function ConsulterUtilisateur() {
@@ -15,7 +16,7 @@ function ConsulterUtilisateur() {
 
     useEffect(() => {
         
-        api.get(`/utilisateurs/${id}`)
+        getUtilisateurById(id)
             .then((res) => {
                 const data = res.data;
 
@@ -36,7 +37,6 @@ function ConsulterUtilisateur() {
                 }
             })
             .catch((err) => {
-                console.error("Erreur lors du chargement de l'utilisateur :", err);
                 setError("Impossible de charger les détails de l'utilisateur.");
             })
             .finally(() => {
@@ -55,7 +55,7 @@ function ConsulterUtilisateur() {
     if (error) {
         return (
             <div className="consulter-main-area">
-                <p className="consulter-error">{error}</p>
+                <ErrorBanner type="error" message={error} />
                 <button
                     className="consulter-btn-retour"
                     onClick={() => navigate("/utilisateurs")}

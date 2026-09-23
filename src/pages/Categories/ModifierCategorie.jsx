@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getCategorieById, modifierCategorie } from "../../service/CategoryService.js";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../Style/form.css";
 
 const schema = yup.object({
@@ -16,6 +17,7 @@ function ModifierCategorie() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [submitError, setSubmitError] = useState(null);
 
     const {
         register,
@@ -31,8 +33,7 @@ function ModifierCategorie() {
             .then((res) => {
                 reset(res.data);
             })
-            .catch((err) => {
-                console.error("Erreur lors du chargement de la catégorie :", err);
+            .catch(() => {
                 setError("Impossible de charger les données de la catégorie.");
             })
             .finally(() => {
@@ -45,11 +46,12 @@ function ModifierCategorie() {
     }, [id, reset]);
 
     const onSubmit = async (data) => {
+        setSubmitError(null);
         try {
             await modifierCategorie(id, data);
             navigate("/categories");
         } catch (err) {
-            console.error("Erreur lors de la modification :", err);
+            setSubmitError("Erreur lors de la modification de la catégorie.");
         }
     };
 
@@ -64,7 +66,7 @@ function ModifierCategorie() {
     if (error) {
         return (
             <div className="form-main-area">
-                <p className="form-error">{error}</p>
+                <ErrorBanner type="error" message={error} />
                 <button
                     className="form-btn-annuler"
                     onClick={() => navigate("/categories")}
@@ -80,6 +82,8 @@ function ModifierCategorie() {
             <main className="form-content-wrapper">
                 <div className="form-card-container">
                     <h3 className="form-form-title">Modifier la catégorie</h3>
+
+                    <ErrorBanner type="error" message={submitError} />
 
                     <form onSubmit={handleSubmit(onSubmit)} className="form-form">
                         <div className="form-form-group">

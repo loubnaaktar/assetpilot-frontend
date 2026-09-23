@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { changerMotDePasse, getMonProfil, modifierMonProfil } from "../../service/UtilisateurService.js";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../Style/form.css";
 import "../../Style/consulter.css";
 import "./Profil.css";
@@ -122,7 +123,7 @@ function Profil() {
     if (error) {
         return (
             <div className="form-main-area">
-                <p className="consulter-error">{error}</p>
+                <ErrorBanner type="error" message={error} />
             </div>
         );
     }
@@ -133,11 +134,7 @@ function Profil() {
                 <div className="form-card-container">
                     <h3 className="form-form-title">Mes informations</h3>
 
-                    {messageInfos && (
-                        <p className={messageInfos.type === "success" ? "profil-message-success" : "profil-message-error"}>
-                            {messageInfos.text}
-                        </p>
-                    )}
+                    {messageInfos && <ErrorBanner type={messageInfos.type} message={messageInfos.text} />}
 
                     <form className="form-form" onSubmit={handleSubmitInfos(onSubmitInfos)}>
                         <div className="form-form-group">
@@ -216,11 +213,7 @@ function Profil() {
                 <div className="form-card-container">
                     <h3 className="form-form-title">Modifier le mot de passe</h3>
 
-                    {messagePassword && (
-                        <p className={messagePassword.type === "success" ? "profil-message-success" : "profil-message-error"}>
-                            {messagePassword.text}
-                        </p>
-                    )}
+                    {messagePassword && <ErrorBanner type={messagePassword.type} message={messagePassword.text} />}
 
                     <form className="form-form" onSubmit={handleSubmitPass(onSubmitPassword)}>
                         <div className="form-form-group">

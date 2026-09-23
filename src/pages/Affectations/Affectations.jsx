@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getAffectations, restituerAffectation } from "../../service/AffectationService.js";
 import { Link } from "react-router-dom";
 import { FiRefreshCw, FiEye, FiCornerUpLeft } from "react-icons/fi";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../Style/Liste.css";
 
 function Affectations() {
@@ -36,9 +37,8 @@ function Affectations() {
                 setTotalPages(response.data.totalPages || 1);
                 setError(null);
             })
-            .catch((error) => {
+            .catch(() => {
                 setError("Erreur lors du chargement des affectations.");
-                console.error("Erreur lors du chargement des affectations :", error);
             })
             .finally(() => {
                 setLoading(false);
@@ -72,8 +72,7 @@ function Affectations() {
                 await restituerAffectation(id);
                 fetchAffectations();
             } catch (err) {
-                console.error("Erreur lors de la restitution:", err);
-                alert("Erreur lors de la restitution de l'équipement.");
+                setError("Erreur lors de la restitution de l'équipement.");
             }
         }
     };
@@ -86,16 +85,9 @@ function Affectations() {
         );
     }
 
-    if (error) {
-        return (
-            <div className="clients-container">
-                <p style={{ color: "red" }}>{error}</p>
-            </div>
-        );
-    }
-
     return (
         <div className="clients-container">
+            <ErrorBanner type="error" message={error} />
             <div className="clients-header">
                 <h2 className="clients-titre">Gestion des Affectations</h2>
                 <Link className="btn-ajouter" to="/ajouterAffectation">+ Nouvelle Affectation</Link>

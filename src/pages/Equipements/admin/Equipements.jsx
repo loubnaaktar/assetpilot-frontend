@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { MdQrCode } from "react-icons/md";
 import { FiRefreshCw, FiX, FiEdit, FiTrash2 } from "react-icons/fi";
 import { QRCodeSVG } from "qrcode.react";
+import ErrorBanner from "../../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../../Style/Liste.css";
 
 function Equipements() {
@@ -59,9 +60,8 @@ function Equipements() {
                 setTotalPages(response.data.totalPages || 1);
                 setError(null);
             })
-            .catch((error) => {
+            .catch(() => {
                 setError("Erreur lors du chargement des équipements.");
-                console.error("Erreur lors du chargement des équipements :", error);
             })
             .finally(() => {
                 setLoading(false);
@@ -109,8 +109,7 @@ function Equipements() {
                 await supprimerEquipement(id);
                 fetchEquipements();
             } catch (err) {
-                console.error("Erreur lors de la suppression:", err);
-                alert("Erreur lors de la suppression de l'équipement.");
+                setError("Erreur lors de la suppression de l'équipement.");
             }
         }
     };
@@ -123,16 +122,9 @@ function Equipements() {
         );
     }
 
-    if (error) {
-        return (
-            <div className="clients-container">
-                <p style={{ color: "red" }}>{error}</p>
-            </div>
-        );
-    }
-
     return (
         <div className="clients-container">
+            <ErrorBanner type="error" message={error} />
             <div className="clients-header">
                 <h2 className="clients-titre">Inventaire des Actifs</h2>
                 <Link className="btn-ajouter" to="/ajouterEquipement">+ Ajouter un actif</Link>
@@ -152,7 +144,7 @@ function Equipements() {
                     )}
                     <input
                         type="text"
-                        placeholder="Rechercher par modèle, marque ou n° série..."
+                        placeholder="Rechercher par modèle..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         className="search-input"
@@ -256,7 +248,6 @@ function Equipements() {
                 </button>
             </div>
 
-            {}
             {selectedQrEquipement && (
                 <div className="modal-overlay">
                     <div className="modal-content">

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { assignerIncident } from "../../../service/IncidentService.js";
 import { getSpecialites, getTechniciensParSpecialite } from "../../../service/TechnicienService.js";
 import { FiX, FiUserCheck } from "react-icons/fi";
+import ErrorBanner from "../../../components/ErrorBanner/ErrorBanner.jsx";
 
 function AssignerIncidentModal({ incident, onClose, onSuccess }) {
     const [specialites, setSpecialites] = useState([]);
@@ -49,7 +50,6 @@ function AssignerIncidentModal({ incident, onClose, onSuccess }) {
             onSuccess();
             onClose();
         } catch (err) {
-            console.error("Erreur d'assignation :", err);
             setError("Impossible d'assigner cet incident.");
         } finally {
             setLoading(false);
@@ -67,7 +67,7 @@ function AssignerIncidentModal({ incident, onClose, onSuccess }) {
                 </div>
 
                 <form onSubmit={handleSubmit} className="modal-body" style={{ textAlign: "left", alignItems: "stretch" }}>
-                    {error && <p className="form-error">{error}</p>}
+                    <ErrorBanner type="error" message={error} />
 
                     <div className="form-form-group" style={{ marginBottom: "16px" }}>
                         <label className="form-form-label">Spécialité :</label>

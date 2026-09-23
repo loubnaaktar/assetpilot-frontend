@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAffectationById } from "../../service/AffectationService.js";
+import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../Style/consulter.css";
 
 function ConsulterAffectation() {
@@ -16,8 +17,7 @@ function ConsulterAffectation() {
             .then((res) => {
                 setAffectation(res.data);
             })
-            .catch((err) => {
-                console.error("Erreur lors du chargement de l'affectation :", err);
+            .catch(() => {
                 setError("Impossible de charger les détails de l'affectation.");
             })
             .finally(() => {
@@ -36,7 +36,7 @@ function ConsulterAffectation() {
     if (error) {
         return (
             <div className="consulter-main-area">
-                <p className="consulter-error">{error}</p>
+                <ErrorBanner type="error" message={error} />
                 <button
                     className="consulter-btn-retour"
                     onClick={() => navigate("/affectations")}

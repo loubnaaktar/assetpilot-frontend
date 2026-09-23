@@ -3,6 +3,7 @@ import { getIncidents, exporterIncidentsExcel } from "../../../service/IncidentS
 import { Link } from "react-router-dom";
 import { FiRefreshCw, FiEye, FiUserCheck, FiDownload } from "react-icons/fi";
 import AssignerIncidentModal from "./AssignerIncidentModal.jsx";
+import ErrorBanner from "../../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../../Style/Liste.css";
 
 function Incidents() {
@@ -88,7 +89,7 @@ function Incidents() {
             a.download = "incidents.xlsx";
             a.click();
         } catch {
-            alert("Erreur lors du téléchargement.");
+            setError("Erreur lors du téléchargement.");
         }
     };
 
@@ -105,10 +106,10 @@ function Incidents() {
     };
 
     if (loading) return <div className="clients-container"><p>Chargement...</p></div>;
-    if (error) return <div className="clients-container"><p style={{ color: "red" }}>{error}</p></div>;
 
     return (
         <div className="clients-container">
+            <ErrorBanner type="error" message={error} />
             <div className="clients-header">
                 <h2 className="clients-titre">Gestion des Incidents</h2>
                 <button className="btn-search" onClick={handleExport} style={{ display: "flex", alignItems: "center", gap: "5px" }}>
