@@ -34,9 +34,10 @@ api.interceptors.response.use(
                 break;
 
             case 401:
-                localStorage.clear();
-
-                window.location.href = "/login";
+                if (!error.config?.url?.includes("/auth/login")) {
+                    localStorage.clear();
+                    window.location.href = "/login";
+                }
                 break;
 
             case 403:

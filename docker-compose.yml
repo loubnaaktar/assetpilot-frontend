@@ -1,0 +1,7 @@
+services:
+  frontend:
+    build: .
+    container_name: assetpilot-frontend
+    restart: always
+    ports:
+      - "3000:80"
