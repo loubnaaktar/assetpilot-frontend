@@ -50,7 +50,7 @@ function AssignerIncidentModal({ incident, onClose, onSuccess }) {
             onSuccess();
             onClose();
         } catch (err) {
-            setError("Impossible d'assigner cet incident.");
+            setError(err.response?.data?.message || "Impossible d'assigner cet incident.");
         } finally {
             setLoading(false);
         }

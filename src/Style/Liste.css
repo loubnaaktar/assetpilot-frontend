@@ -233,6 +233,15 @@
     background-color: #fecaca;
 }
 
+.btn-assigne {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+.btn-assigne:hover {
+    background-color: #bbf7d0;
+}
+
 .status-chip {
     padding: 4px 8px;
     border-radius: 6px;

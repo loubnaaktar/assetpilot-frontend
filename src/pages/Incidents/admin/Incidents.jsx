@@ -192,8 +192,9 @@ function Incidents() {
 
                                     {inc.statut !== "RESOLU" && (
                                         <button
-                                            className="btn-icon-action btn-modifier"
+                                            className={`btn-icon-action ${inc.traiteParId ? "btn-assigne" : "btn-modifier"}`}
                                             onClick={() => setSelectedIncidentForAssign(inc)}
+                                            title={inc.traiteParId ? "Changer le technicien" : "Assigner un technicien"}
                                         >
                                             <FiUserCheck />
                                         </button>
