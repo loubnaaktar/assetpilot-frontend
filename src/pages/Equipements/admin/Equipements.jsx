@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { getEquipements, supprimerEquipement } from "../../../service/EquipementService.js";
 import { getCategories } from "../../../service/CategoryService.js";
 import { Link } from "react-router-dom";
-import { MdQrCode } from "react-icons/md";
-import { FiRefreshCw, FiX, FiEdit, FiTrash2 } from "react-icons/fi";
-import { QRCodeSVG } from "qrcode.react";
+import { FiRefreshCw, FiEdit, FiTrash2, FiEye } from "react-icons/fi";
 import ErrorBanner from "../../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../../Style/Liste.css";
 
@@ -25,7 +23,6 @@ function Equipements() {
     const [categories, setCategories] = useState([]);
 
     const [sortDir, setSortDir] = useState("asc");
-    const [selectedQrEquipement, setSelectedQrEquipement] = useState(null);
 
     useEffect(() => {
         getCategories({ size: 100 })
@@ -202,13 +199,13 @@ function Equipements() {
                                 </span>
                             </td>
                             <td className="actions-cell">
-                                <button
+                                <Link
                                     className="btn-icon-action btn-consulter"
-                                    onClick={() => setSelectedQrEquipement(equipement)}
-                                    title="Voir QR Code"
+                                    to={`/consulterEquipement/${equipement.id}`}
+                                    title="Consulter"
                                 >
-                                    <MdQrCode />
-                                </button>
+                                    <FiEye />
+                                </Link>
                                 <Link
                                     className="btn-icon-action btn-modifier"
                                     to={`/modifierEquipement/${equipement.id}`}
@@ -247,35 +244,6 @@ function Equipements() {
                     Suivant
                 </button>
             </div>
-
-            {selectedQrEquipement && (
-                <div className="modal-overlay">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h3>Code QR de l'actif</h3>
-                            <button className="close-btn" onClick={() => setSelectedQrEquipement(null)}>
-                                <FiX />
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="qr-box">
-                                <QRCodeSVG
-                                    value={JSON.stringify({
-                                        id: selectedQrEquipement.id,
-                                        numeroSerie: selectedQrEquipement.numeroSerie || selectedQrEquipement.code,
-                                        nom: selectedQrEquipement.nom || selectedQrEquipement.modele,
-                                    })}
-                                    size={180}
-                                />
-                            </div>
-                            <h4>{selectedQrEquipement.nom || selectedQrEquipement.modele}</h4>
-                            <p className="qr-serial">
-                                {selectedQrEquipement.numeroSerie || selectedQrEquipement.code || `#EQ-${selectedQrEquipement.id}`}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }

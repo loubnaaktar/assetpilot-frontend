@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getAffectations, restituerAffectation } from "../../service/AffectationService.js";
 import { Link } from "react-router-dom";
-import { FiRefreshCw, FiEye, FiCornerUpLeft } from "react-icons/fi";
+import { FiEye, FiCornerUpLeft } from "react-icons/fi";
 import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../Style/Liste.css";
 
@@ -14,8 +14,6 @@ function Affectations() {
     const [totalPages, setTotalPages] = useState(0);
     const [pageSize] = useState(5);
 
-    const [search, setSearch] = useState("");
-    const [appliedSearch, setAppliedSearch] = useState("");
     const [sortDir, setSortDir] = useState("desc");
 
     const fetchAffectations = () => {
@@ -26,10 +24,6 @@ function Affectations() {
             size: pageSize,
             sort: `dateDebut,${sortDir}`,
         };
-
-        if (appliedSearch.trim() !== "") {
-            params.mot = appliedSearch;
-        }
 
         getAffectations(params)
             .then((response) => {
@@ -47,19 +41,7 @@ function Affectations() {
 
     useEffect(() => {
         fetchAffectations();
-    }, [page, sortDir, appliedSearch]);
-
-    const handleSearchSubmit = (e) => {
-        e.preventDefault();
-        setAppliedSearch(search);
-        setPage(0);
-    };
-
-    const clearFilters = () => {
-        setSearch("");
-        setAppliedSearch("");
-        setPage(0);
-    };
+    }, [page, sortDir]);
 
     const handleSort = () => {
         setSortDir(sortDir === "asc" ? "desc" : "asc");
@@ -92,29 +74,6 @@ function Affectations() {
                 <h2 className="clients-titre">Gestion des Affectations</h2>
                 <Link className="btn-ajouter" to="/ajouterAffectation">+ Nouvelle Affectation</Link>
             </div>
-
-            <form className="search-bar" onSubmit={handleSearchSubmit}>
-                <div className="search-input-group">
-                    {appliedSearch !== "" && (
-                        <button
-                            type="button"
-                            className="btn-clear"
-                            onClick={clearFilters}
-                            title="Réinitialiser les filtres"
-                        >
-                            <FiRefreshCw />
-                        </button>
-                    )}
-                    <input
-                        type="text"
-                        placeholder="Rechercher par employé ou équipement..."
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        className="search-input"
-                    />
-                    <button type="submit" className="btn-search">Chercher</button>
-                </div>
-            </form>
 
             <div className="table-responsive">
                 <table className="clients-table">

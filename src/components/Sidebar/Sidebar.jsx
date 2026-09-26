@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
     FiGrid,
@@ -7,7 +6,8 @@ import {
     FiTool,
     FiUsers,
     FiLogOut,
-    FiTag
+    FiTag,
+    FiCheckCircle
 } from "react-icons/fi";
 import './Sidebar.css';
 import { getRoleFromToken } from '../../utils/auth.js';
@@ -35,7 +35,7 @@ function Sidebar() {
                     </NavLink>
                 )}
 
-                {(role === "ADMIN" || role === "TECHNICIEN") && (
+                {role === "ADMIN" && (
                     <NavLink to="/equipements" className="sidebar-item">
                         <FiArchive className="sidebar-icon" />
                         <span>Équipements</span>
@@ -57,17 +57,30 @@ function Sidebar() {
                 )}
 
                 {role === "EMPLOYE" ? (
-                    <NavLink to="/ajouterIncident" className="sidebar-item">
-                        <FiTool className="sidebar-icon" />
-                        <span>Signaler un incident</span>
-                    </NavLink>
+                    <>
+                        <NavLink to="/mesEquipements" className="sidebar-item">
+                            <FiArchive className="sidebar-icon" />
+                            <span>Mes équipements</span>
+                        </NavLink>
+                        <NavLink to="/declarerIncident" className="sidebar-item">
+                            <FiTool className="sidebar-icon" />
+                            <span>Déclarer un incident</span>
+                        </NavLink>
+                    </>
                 ) : (
-                    (role === "ADMIN" || role === "TECHNICIEN") && (
+                    role === "ADMIN" && (
                         <NavLink to="/incidents" className="sidebar-item">
                             <FiTool className="sidebar-icon" />
                             <span>Incidents et Maintenance</span>
                         </NavLink>
                     )
+                )}
+
+                {role === "TECHNICIEN" && (
+                    <NavLink to="/suivi-incidents" className="sidebar-item">
+                        <FiCheckCircle className="sidebar-icon" />
+                        <span>Suivi des incidents</span>
+                    </NavLink>
                 )}
 
                 {role === "ADMIN" && (

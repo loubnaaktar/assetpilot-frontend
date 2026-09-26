@@ -4,7 +4,8 @@ import Login from "../pages/auth/Login";
 import Landing from "../pages/Landing/Landing";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Profil from "../pages/Profil/Profil";
-//import AccesRefuse from "../pages/AccesRefuse/AccesRefuse";
+import AccesRefuse from "../pages/AccesRefuse/AccesRefuse";
+import NotFound from "../pages/NotFound/NotFound";
 
 import MainLayout from "../layouts/MainLayout";
 import ProtectedRoute from "./ProtectedRoute";
@@ -13,38 +14,28 @@ import RoleGuard from "./RoleGuard";
 import Affectations from "../pages/Affectations/Affectations";
 import AjouterAffectation from "../pages/Affectations/AjouterAffectation";
 import ConsulterAffectation from "../pages/Affectations/ConsulterAffectation";
-//import ModifierAffectation from "../pages/Affectations/ModifierAffectation";
 
 import Categories from "../pages/Categories/Categories";
 import AjouterCategorie from "../pages/Categories/AjouterCategorie";
 import ConsulterCategorie from "../pages/Categories/ConsulterCategorie";
 import ModifierCategorie from "../pages/Categories/ModifierCategorie";
 
-//import Employes from "../pages/Employes/Employes";
-//import AjouterEmploye from "../pages/Employes/AjouterEmploye";
-//import ConsulterEmploye from "../pages/Employes/ConsulterEmploye";
-//import ModifierEmploye from "../pages/Employes/ModifierEmploye";
-
 import Equipements from "../pages/Equipements/admin/Equipements.jsx";
 import AjouterEquipement from "../pages/Equipements/admin/AjouterEquipement.jsx";
+import ConsulterEquipement from "../pages/Equipements/admin/ConsulterEquipement.jsx";
 import ModifierEquipement from "../pages/Equipements/admin/ModifierEquipement.jsx";
 
 import Incidents from "../pages/Incidents/admin/Incidents.jsx";
-//import AjouterIncident from "../pages/Incidents/AjouterIncident";
+import DeclarerIncident from "../pages/Incidents/employe/DeclarerIncident.jsx";
 import ConsulterIncident from "../pages/Incidents/admin/ConsulterIncident.jsx";
-//import ModifierIncident from "../pages/Incidents/ModifierIncident";
-
-//import Techniciens from "../pages/Techniciens/Techniciens";
-//import AjouterTechnicien from "../pages/Techniciens/AjouterTechnicien";
-//import ConsulterTechnicien from "../pages/Techniciens/ConsulterTechnicien";
-//import ModifierTechnicien from "../pages/Techniciens/ModifierTechnicien";
+import SuiviIncidents from "../pages/Incidents/technicien/SuiviIncidents.jsx";
+import ModifierIncident from "../pages/Incidents/technicien/ModifierIncident.jsx";
+import MesEquipements from "../pages/Equipements/employe/MesEquipements.jsx";
 
 import Utilisateurs from "../pages/Utilisateurs/Utilisateurs";
 import AjouterUtilisateur from "../pages/Utilisateurs/AjouterUtilisateur";
 import ConsulterUtilisateur from "../pages/Utilisateurs/ConsulterUtilisateur";
-//import ModifierUtilisateur from "../pages/Utilisateurs/ModifierUtilisateur";
-
-//import NotFound from "../pages/NotFound";
+import ModifierUtilisateur from "../pages/Utilisateurs/ModifierUtilisateur";
 
 const ADMIN = "ADMIN";
 const EMPLOYE = "EMPLOYE";
@@ -55,6 +46,8 @@ function AppRoutes() {
         <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/acces-refuse" element={<AccesRefuse />} />
+            <Route path="*" element={<NotFound />} />
 
 
             <Route
@@ -82,8 +75,17 @@ function AppRoutes() {
                 <Route
                     path="/equipements"
                     element={
-                        <RoleGuard roles={[ADMIN, TECHNICIEN]}>
+                        <RoleGuard roles={[ADMIN]}>
                             <Equipements />
+                        </RoleGuard>
+                    }
+                />
+
+                <Route
+                    path="/consulterEquipement/:id"
+                    element={
+                        <RoleGuard roles={[ADMIN]}>
+                            <ConsulterEquipement />
                         </RoleGuard>
                     }
                 />
@@ -168,8 +170,26 @@ function AppRoutes() {
                 <Route
                     path="/incidents"
                     element={
-                        <RoleGuard roles={[ADMIN, TECHNICIEN]}>
+                        <RoleGuard roles={[ADMIN]}>
                             <Incidents />
+                        </RoleGuard>
+                    }
+                />
+
+                <Route
+                    path="/declarerIncident"
+                    element={
+                        <RoleGuard roles={[EMPLOYE]}>
+                            <DeclarerIncident />
+                        </RoleGuard>
+                    }
+                />
+
+                <Route
+                    path="/mesEquipements"
+                    element={
+                        <RoleGuard roles={[EMPLOYE]}>
+                            <MesEquipements />
                         </RoleGuard>
                     }
                 />
@@ -179,6 +199,24 @@ function AppRoutes() {
                     element={
                         <RoleGuard roles={[ADMIN, TECHNICIEN]}>
                             <ConsulterIncident />
+                        </RoleGuard>
+                    }
+                />
+
+                <Route
+                    path="/suivi-incidents"
+                    element={
+                        <RoleGuard roles={[TECHNICIEN]}>
+                            <SuiviIncidents />
+                        </RoleGuard>
+                    }
+                />
+
+                <Route
+                    path="/modifierIncident/:id"
+                    element={
+                        <RoleGuard roles={[TECHNICIEN]}>
+                            <ModifierIncident />
                         </RoleGuard>
                     }
                 />
@@ -209,88 +247,6 @@ function AppRoutes() {
                         </RoleGuard>
                     }
                 />
-                {/*
-
-                <Route
-                    path="/modifierAffectation/:id"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <ModifierAffectation />
-                        </RoleGuard>
-                    }
-                />
-
-                <Route
-                    path="/ajouterEmploye"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <AjouterEmploye />
-                        </RoleGuard>
-                    }
-                />
-                <Route
-                    path="/consulterEmploye/:id"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <ConsulterEmploye />
-                        </RoleGuard>
-                    }
-                />
-                <Route
-                    path="/modifierEmploye/:id"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <ModifierEmploye />
-                        </RoleGuard>
-                    }
-                />
-
-
-                <Route
-                    path="/ajouterIncident"
-                    element={
-                        <RoleGuard roles={[EMPLOYE]}>
-                            <AjouterIncident />
-                        </RoleGuard>
-                    }
-                />
-                <Route
-                    path="/modifierIncident/:id"
-                    element={
-                        <RoleGuard roles={[TECHNICIEN]}>
-                            <ModifierIncident />
-                        </RoleGuard>
-                    }
-                />
-
-                <Route
-                    path="/techniciens"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <Techniciens />
-                        </RoleGuard>
-                    }
-                />
-                <Route
-                    path="/ajouterTechnicien"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <AjouterTechnicien />
-                        </RoleGuard>
-                    }
-                />
-
-                <Route
-                    path="/modifierTechnicien/:id"
-                    element={
-                        <RoleGuard roles={[ADMIN]}>
-                            <ModifierTechnicien />
-                        </RoleGuard>
-                    }
-                />
-
-
-
 
                 <Route
                     path="/modifierUtilisateur/:id"
@@ -300,12 +256,6 @@ function AppRoutes() {
                         </RoleGuard>
                     }
                 />
-
-
-            <Route path="/acces-refuse" element={<AccesRefuse />} />
-            <Route path="*" element={<NotFound />} />
-
-              */}
             </Route>
         </Routes>
     );

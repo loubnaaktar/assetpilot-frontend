@@ -17,6 +17,11 @@ export const getIncidentsByEmploye = (employeId, params) =>
 export const getIncidentsByTechnicien = (technicienId, params) =>
   api.get(`/incidents/technicien/${technicienId}`, { params });
 
+export const getIncidentsByEquipement = (equipementId, params) =>
+  api.get(`/incidents/equipement/${equipementId}`, { params });
+
+export const getMesIncidents = (params) => api.get("/incidents/mes-incidents", { params });
+
 export const getIncidentById = (id) => api.get(`/incidents/${id}`);
 
 export const exporterIncidentsExcel = () =>

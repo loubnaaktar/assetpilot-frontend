@@ -12,6 +12,9 @@ export const getEquipementsByStatut = (statut, params) =>
   api.get(`/equipements/statut/${statut}`, { params });
 
 export const getEquipementsByCategorie = (categorieId, params) =>
-  api.get(`/equipements/Categorie/${categorieId}`, { params });
+  api.get(`/equipements/categorie/${categorieId}`, { params });
+
+export const getEquipementsEmploye = (employeId, params) =>
+  api.get(`/equipements/employe/${employeId}`, { params });
 
 export const supprimerEquipement = (id) => api.delete(`/equipements/${id}`);
