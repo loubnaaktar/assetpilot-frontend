@@ -67,7 +67,11 @@ function ConsulterAffectation() {
                 <div className="consulter-info-group">
                     <span className="consulter-label">Employé :</span>
                     <span className="consulter-value">
-                        {affectation?.employeNom || affectation?.employe?.nom || `#${affectation?.employeId}`}
+                        {!affectation?.employeNom
+                            ? `Employé #${affectation?.employeId}`
+                            : affectation?.employeId
+                                ? affectation.employeNom
+                                : `${affectation.employeNom} (utilisateur supprimé)`}
                     </span>
                 </div>
 

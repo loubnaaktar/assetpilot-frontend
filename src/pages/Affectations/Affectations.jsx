@@ -102,7 +102,13 @@ function Affectations() {
                             <tr key={aff.id}>
                                 <td>{aff.id}</td>
                                 <td>{aff.equipementNom || aff.equipement?.modele || `Équipement #${aff.equipementId || aff.equipement?.id}`}</td>
-                                <td>{aff.employeNom || aff.employe?.nom || `Employé #${aff.employeId || aff.employe?.id}`}</td>
+                                <td>
+                                    {!aff.employeNom
+                                        ? `Employé #${aff.employeId}`
+                                        : aff.employeId
+                                            ? aff.employeNom
+                                            : `${aff.employeNom} (utilisateur supprimé)`}
+                                </td>
                                 <td>{aff.dateDebut ? new Date(aff.dateDebut).toLocaleDateString() : "-"}</td>
                                 <td>{aff.dateFin ? new Date(aff.dateFin).toLocaleDateString() : "En cours"}</td>
                                 <td>
