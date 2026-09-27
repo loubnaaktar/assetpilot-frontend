@@ -82,14 +82,22 @@ function ConsulterIncident() {
                 <div className="consulter-info-group">
                     <span className="consulter-label">Déclaré par :</span>
                     <span className="consulter-value">
-                        {incident?.declareParNom || `Employé #${incident?.declareParId}`}
+                        {!incident?.declareParNom
+                            ? `Employé #${incident?.declareParId}`
+                            : incident?.declareParId
+                                ? incident.declareParNom
+                                : `${incident.declareParNom} (utilisateur supprimé)`}
                     </span>
                 </div>
 
                 <div className="consulter-info-group">
                     <span className="consulter-label">Technicien :</span>
                     <span className="consulter-value">
-                        {incident?.traiteParNom || "Non assigné"}
+                        {!incident?.traiteParNom
+                            ? "Non assigné"
+                            : incident?.traiteParId
+                                ? incident.traiteParNom
+                                : `${incident.traiteParNom} (utilisateur supprimé)`}
                     </span>
                 </div>
 

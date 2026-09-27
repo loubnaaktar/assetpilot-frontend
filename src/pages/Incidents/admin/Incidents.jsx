@@ -17,6 +17,7 @@ function Incidents() {
     const [statutFilter, setStatutFilter] = useState("");
     const [urgenceFilter, setUrgenceFilter] = useState("");
     const [nonAssigneeFilter, setNonAssigneeFilter] = useState(false);
+    const [triDate, setTriDate] = useState("desc");
 
     const [selectedIncidentForAssign, setSelectedIncidentForAssign] = useState(null);
 
@@ -26,6 +27,7 @@ function Incidents() {
         const params = {
             page: page,
             size: 5,
+            sort: "dateDeclaration," + triDate,
         };
 
         if (statutFilter !== "") {
@@ -54,7 +56,7 @@ function Incidents() {
 
     useEffect(() => {
         fetchIncidents();
-    }, [page, statutFilter, urgenceFilter, nonAssigneeFilter]);
+    }, [page, statutFilter, urgenceFilter, nonAssigneeFilter, triDate]);
 
     const handleStatutChange = (e) => {
         setStatutFilter(e.target.value);
@@ -68,6 +70,11 @@ function Incidents() {
 
     const handleNonAssigneToggle = () => {
         setNonAssigneeFilter(!nonAssigneeFilter);
+        setPage(0);
+    };
+
+    const handleTriDate = () => {
+        setTriDate(triDate === "desc" ? "asc" : "desc");
         setPage(0);
     };
 
@@ -160,31 +167,51 @@ function Incidents() {
                         <th>Technicien</th>
                         <th>Urgence</th>
                         <th>Statut</th>
+                        <th
+                            className="th-triable"
+                            onClick={handleTriDate}
+                            title="Cliquer pour trier par date"
+                        >
+                            Date de déclaration {triDate === "desc" ? "↓" : "↑"}
+                        </th>
                         <th className="text-center">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {incidents.length === 0 ? (
                         <tr>
-                            <td colSpan="7" style={{ textAlign: "center" }}>Aucun incident trouvé.</td>
+                            <td colSpan="8" style={{ textAlign: "center" }}>Aucun incident trouvé.</td>
                         </tr>
                     ) : (
                         incidents.map((inc) => (
                             <tr key={inc.id}>
                                 <td>{inc.id}</td>
                                 <td>{inc.equipementNumeroSerie || inc.equipementId}</td>
-                                <td>{inc.declareParNom || inc.declareParId}</td>
-                                <td>{inc.traiteParNom || "Non assigné"}</td>
+                                <td>
+                                    {!inc.declareParNom
+                                        ? `Employé #${inc.declareParId}`
+                                        : inc.declareParId
+                                            ? inc.declareParNom
+                                            : `${inc.declareParNom} (utilisateur supprimé)`}
+                                </td>
+                                <td>
+                                    {!inc.traiteParNom
+                                        ? "Non assigné"
+                                        : inc.traiteParId
+                                            ? inc.traiteParNom
+                                            : `${inc.traiteParNom} (utilisateur supprimé)`}
+                                </td>
                                 <td>
                                         <span className="status-chip" style={getUrgenceStyle(inc.niveauUrgence)}>
                                             {inc.niveauUrgence}
                                         </span>
                                 </td>
                                 <td>
-                                        <span className="status-chip" style={getStatutStyle(inc.statut)}>
-                                            {inc.statut}
-                                        </span>
+                                    <span className="status-chip" style={getStatutStyle(inc.statut)}>
+                                        {inc.statut}
+                                    </span>
                                 </td>
+                                <td>{inc.dateDeclaration ? inc.dateDeclaration.slice(0, 10) : "-"}</td>
                                 <td className="actions-cell">
                                     <Link className="btn-icon-action btn-consulter" to={`/consulterIncident/${inc.id}`}>
                                         <FiEye />
