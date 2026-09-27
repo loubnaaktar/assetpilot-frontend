@@ -78,7 +78,6 @@ function ModifierIncident() {
                                 value={statut}
                                 onChange={(e) => setStatut(e.target.value)}
                             >
-                                <option value="OUVERT">OUVERT</option>
                                 <option value="EN_COURS">EN COURS</option>
                                 <option value="RESOLU">RÉSOLU</option>
                             </select>

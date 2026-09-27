@@ -52,7 +52,13 @@ function SuiviIncidents() {
                                 <td>#{inc.id}</td>
                                 <td>{`${inc.equipementModele || "-"} · ${inc.equipementNumeroSerie || `#${inc.equipementId}`}`}</td>
                                 <td>{inc.description}</td>
-                                <td>{inc.declareParNom || `Employé #${inc.declareParId}`}</td>
+                                <td>
+                                    {!inc.declareParNom
+                                        ? `Employé #${inc.declareParId}`
+                                        : inc.declareParId
+                                            ? inc.declareParNom
+                                            : `${inc.declareParNom} (utilisateur supprimé)`}
+                                </td>
                                 <td>{inc.dateDeclaration ? inc.dateDeclaration.slice(0, 10) : "-"}</td>
                                 <td>
                                     <span className={`status-chip ${(inc.statut || "").toLowerCase()}`}>
