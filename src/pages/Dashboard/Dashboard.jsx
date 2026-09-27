@@ -55,15 +55,27 @@ function Dashboard() {
                 setRecentIncidents(incidentsList.slice(0, 5)); 
 
                 
-                const counts = [0, 0, 0, 0, 0, 0, 0];
-                incidentsList.forEach((inc) => {
-                    if (inc.dateDeclaration) {
-                        const day = new Date(inc.dateDeclaration).getDay();
-                        
-                        const index = day === 0 ? 6 : day - 1; 
-                        counts[index] += 1;
+                const counts = Array(7).fill(0);
+                const today = new Date();
+
+                for (let i = 0; i < 7; i++) {
+                    const jour = new Date(today);
+                    jour.setDate(today.getDate() - (6 - i));
+
+                    for (let j = 0; j < incidentsList.length; j++) {
+                        if (!incidentsList[j].dateDeclaration) continue;
+
+                        const dateIncident = new Date(incidentsList[j].dateDeclaration);
+
+                        if (
+                            dateIncident.getFullYear() === jour.getFullYear() &&
+                            dateIncident.getMonth() === jour.getMonth() &&
+                            dateIncident.getDate() === jour.getDate()
+                        ) {
+                            counts[i] += 1;
+                        }
                     }
-                });
+                }
                 setWeeklyIncidents(counts);
             } else {
                 setError("Erreur lors du chargement des incidents.");
@@ -99,8 +111,16 @@ function Dashboard() {
     };
 
     
+    const lineLabels = [];
+    const today = new Date();
+    for (let i = 6; i >= 0; i--) {
+        const jour = new Date(today);
+        jour.setDate(today.getDate() - i);
+        lineLabels.push(jour.getDate() + "/" + (jour.getMonth() + 1));
+    }
+
     const lineData = {
-        labels: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
+        labels: lineLabels,
         datasets: [
             {
                 label: "Incidents signalés",
@@ -215,7 +235,11 @@ function Dashboard() {
                                 <div className="incident-item-details">
                                     <strong>{incident.equipementNom || incident.equipement?.nom || `Équipement #${incident.id}`}</strong>
                                     <p>
-                                        Déclaré par {incident.declareParNom || incident.declarePar?.nom || "Employé"}
+                                        Déclaré par {incident.declareParNom
+                                            ? (incident.declareParId
+                                                ? incident.declareParNom
+                                                : `${incident.declareParNom} (utilisateur supprimé)`)
+                                            : "Employé"}
                                         {incident.dateDeclaration && ` • ${new Date(incident.dateDeclaration).toLocaleDateString()}`}
                                     </p>
                                 </div>
