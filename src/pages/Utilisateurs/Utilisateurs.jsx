@@ -4,6 +4,7 @@ import { FiEdit, FiEye, FiTrash2 } from "react-icons/fi";
 import { getEmployes, supprimerEmploye } from "../../service/EmployeService.js";
 import { getTechniciens, supprimerTechnicien } from "../../service/TechnicienService.js";
 import { getUtilisateurs, supprimerUtilisateur } from "../../service/UtilisateurService.js";
+import { getEmailFromToken } from "../../utils/auth.js";
 import ErrorBanner from "../../components/ErrorBanner/ErrorBanner.jsx";
 import "../../Style/Liste.css";
 
@@ -12,6 +13,8 @@ function Utilisateurs() {
     const [liste, setListe] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    const monEmail = getEmailFromToken();
 
     useEffect(() => {
         setLoading(true);
@@ -112,15 +115,21 @@ function Utilisateurs() {
                                 {type === "EMPLOYE" && <td>{u.matricule || "-"}</td>}
                                 {type === "TECHNICIEN" && <td>{u.specialite || "-"}</td>}
                                 <td className="actions-cell">
-                                    <Link className="btn-icon-action btn-consulter" to={`/consulterUtilisateur/${u.id}`}>
-                                        <FiEye />
-                                    </Link>
-                                    <Link className="btn-icon-action btn-modifier" to={`/modifierUtilisateur/${u.id}`}>
-                                        <FiEdit />
-                                    </Link>
-                                    <button className="btn-icon-action btn-supprimer" onClick={() => handleDelete(u.id)}>
-                                        <FiTrash2 />
-                                    </button>
+                                    {u.email === monEmail ? (
+                                        <span>-</span>
+                                    ) : (
+                                        <>
+                                            <Link className="btn-icon-action btn-consulter" to={`/consulterUtilisateur/${u.id}`}>
+                                                <FiEye />
+                                            </Link>
+                                            <Link className="btn-icon-action btn-modifier" to={`/modifierUtilisateur/${u.id}`}>
+                                                <FiEdit />
+                                            </Link>
+                                            <button className="btn-icon-action btn-supprimer" onClick={() => handleDelete(u.id)}>
+                                                <FiTrash2 />
+                                            </button>
+                                        </>
+                                    )}
                                 </td>
                             </tr>
                         ))

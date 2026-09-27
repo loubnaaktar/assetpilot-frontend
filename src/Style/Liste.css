@@ -169,6 +169,15 @@
     text-align: center;
 }
 
+.clients-table th.th-triable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.clients-table th.th-triable:hover {
+    background-color: #e2e8f0;
+}
+
 .actions-cell {
     display: flex;
     justify-content: center;
